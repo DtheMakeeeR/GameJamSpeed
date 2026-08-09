@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &283654904217740999
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Box3_{283654904217740999}
+  m_AudioClip: {fileID: 8300000, guid: aae738406b72e5842b300c151a16faf9, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Random Box Sound
+  m_Volume: 0
+  m_Pitch: 486
+  m_AutomaticTriggerTime: 0
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: 0, y: 80}
+  m_PitchRandomizationRange: {x: -408.51068, y: 0}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: 8964160377892775422}
+  - {fileID: 283654904217740999}
+  - {fileID: 8211496722398967463}
+  - {fileID: 7281876584990636279}
+  m_AvoidRepeatingLast: 0
+  m_PlaybackMode: 1
+  m_TriggerMode: 0
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 2
+  m_VolumeRandomizationEnabled: 0
+  m_PitchRandomizationEnabled: 1
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &7281876584990636279
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Box4_{7281876584990636279}
+  m_AudioClip: {fileID: 8300000, guid: b70a2e58f69c1a846b3bf3d2efc4e1e2, type: 3}
+  m_Volume: 0
+  m_Enabled: 0
+--- !u!1233149941 &8211496722398967463
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Box2_{8211496722398967463}
+  m_AudioClip: {fileID: 8300000, guid: c15008fef00f78848b3a8971ba27b76a, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &8964160377892775422
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Box1_{8964160377892775422}
+  m_AudioClip: {fileID: 8300000, guid: 14d0feccad7612341ab3eddbb46efaf3, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
