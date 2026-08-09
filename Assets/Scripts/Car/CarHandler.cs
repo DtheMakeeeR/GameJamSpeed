@@ -13,6 +13,10 @@ public class CarHandler : MonoBehaviour
     [Header("Поворот")]
     [SerializeField] private float _steerCoef = 5;
     [SerializeField] private float _maxRotation = 70f;
+    [SerializeField] private float _maxRotSpeed = 3f;
+    [SerializeField] private float _minRotSpeed = 6f;
+    [SerializeField] private float _rotAccelerationTime = 1.5f;
+    [SerializeField] private float _rotSpeed = 1f;
     
 
     [Header("Мин/Макс")]
@@ -34,7 +38,9 @@ public class CarHandler : MonoBehaviour
     private AnimationCurve _CarPitchAnimationCurve;
 
     private Vector2 _moveInput = Vector2.zero;
+    private Vector2 _previousMoveInput = Vector2.zero;
     private float _carMaxSpeedPercentage = 0f;
+    private float _currentRotationTime = 0f;
     private bool _isExploded = false;
     private float _carStrartPositionZ = 0f;
     private float _distanceTravelled = 0f;
@@ -59,13 +65,56 @@ public class CarHandler : MonoBehaviour
             return;
         }
         UpdateCarAudio();
-        _gameModel.transform.rotation = Quaternion.Euler(0, _rb.linearVelocity.x * 2f, 0);
+        //_gameModel.transform.rotation = Quaternion.Euler(0, _rb.linearVelocity.x * 2f, 0);
         _distanceTravelled = transform.position.z - _carStrartPositionZ;
         if(_distanceTravelled >= PlayerPrefs.GetInt("Record", 0))
         {
             PlayerPrefs.SetInt("Record", (int)_distanceTravelled);
         }
     }
+
+    private void ApplyRotation()
+    {
+        if (_rb.linearVelocity.z <=  0)
+        {
+            _currentRotationTime = 0f;
+            return;
+        }
+        if(_previousMoveInput.x * _moveInput.x <= 0)
+        {
+            _currentRotationTime = 0f;
+        }
+        _currentRotationTime += Time.deltaTime;
+        float rotationSpeed = Mathf.Lerp(_minRotSpeed, _maxRotSpeed, _currentRotationTime / _rotAccelerationTime);
+        rotationSpeed = Mathf.Clamp(rotationSpeed, _minRotSpeed, _maxRotSpeed);
+        float percentage = 1f; // _rb.linearVelocity.z / 250f;
+        float rotationAngle = 0f;
+
+        if (_moveInput.x > 0f)
+        {
+            rotationAngle = _maxRotation;
+        }
+        else if (_moveInput.x < 0f)
+        {
+            rotationAngle = -_maxRotation;
+        }
+        else
+        {
+            return;
+        }
+
+        // Поворачиваем объект
+        Quaternion targetRot = Quaternion.Euler(0, rotationAngle, 0);
+        Quaternion currentRot = transform.rotation;
+        Quaternion newRot = Quaternion.Slerp(currentRot, targetRot, Time.deltaTime * rotationSpeed * percentage);
+        transform.rotation = newRot;
+
+        
+        Quaternion deltaRotation = newRot * Quaternion.Inverse(currentRot);
+        _rb.linearVelocity = deltaRotation * _rb.linearVelocity;
+
+    }
+
     private void FixedUpdate()
     {
         if(_isExploded)
@@ -90,8 +139,9 @@ public class CarHandler : MonoBehaviour
         {
             Brake();
         }
-        Steer();
-        if(_rb.linearVelocity.z <= 0)
+        ApplyRotation();
+        //Steer();
+        if (_rb.linearVelocity.z <= 0)
         {
             _rb.linearVelocity = Vector3.zero;
         }
@@ -146,6 +196,7 @@ public class CarHandler : MonoBehaviour
     }
     public void SetInput(Vector2 moveInput)
     {
+        _previousMoveInput = _moveInput;
         _moveInput = moveInput.normalized;
         Debug.Log($"MoveInput: {_moveInput}");
     }
@@ -216,7 +267,7 @@ public class CarHandler : MonoBehaviour
 
     public bool ChangeGear(Gear gear)
     {
-        if(_rb.linearVelocity.z < gear._minForwardVelocity)
+        if(_rb.linearVelocity.z < gear._minVelocityToChange)
         {
             return false;
         }

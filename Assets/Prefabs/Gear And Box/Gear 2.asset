@@ -18,3 +18,4 @@ MonoBehaviour:
   _maxForwardVelocity: 40
   _minForwardVelocity: 5
   _maxSteerVelocity: 15
+  _minVelocityToChange: 5

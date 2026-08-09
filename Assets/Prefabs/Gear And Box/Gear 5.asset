@@ -16,5 +16,6 @@ MonoBehaviour:
   _steerMultiplier: 5
   _steerCoef: 5
   _maxForwardVelocity: 210
-  _minForwardVelocity: 55
+  _minForwardVelocity: 15
   _maxSteerVelocity: 5
+  _minVelocityToChange: 55

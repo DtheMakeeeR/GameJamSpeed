@@ -14,4 +14,6 @@ public class Gear : ScriptableObject
     public float _maxForwardVelocity;
     public float _minForwardVelocity;
     public float _maxSteerVelocity;
+    public float _minVelocityToChange;
+    
 }
