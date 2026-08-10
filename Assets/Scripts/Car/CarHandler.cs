@@ -86,6 +86,7 @@ public class CarHandler : MonoBehaviour
         }
         _currentRotationTime += Time.deltaTime;
         float rotationSpeed = Mathf.Lerp(_minRotSpeed, _maxRotSpeed, _currentRotationTime / _rotAccelerationTime);
+        rotationSpeed *= Mathf.Clamp01(_rb.linearVelocity.z / 50);
         rotationSpeed = Mathf.Clamp(rotationSpeed, _minRotSpeed, _maxRotSpeed);
         float percentage = 1f; // _rb.linearVelocity.z / 250f;
         float rotationAngle = 0f;

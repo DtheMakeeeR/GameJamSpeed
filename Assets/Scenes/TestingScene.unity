@@ -5713,7 +5713,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6785609681318382131, guid: 88c4ffd0eb39c714584290d21cd48c77, type: 3}
       propertyPath: _minRotSpeed
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6785609681318382131, guid: 88c4ffd0eb39c714584290d21cd48c77, type: 3}
       propertyPath: _maxSteerVelocity
@@ -5721,7 +5721,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6785609681318382131, guid: 88c4ffd0eb39c714584290d21cd48c77, type: 3}
       propertyPath: _rotAccelerationTime
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7012036797860489355, guid: 88c4ffd0eb39c714584290d21cd48c77, type: 3}
       propertyPath: m_Name
