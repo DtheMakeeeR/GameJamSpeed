@@ -16,7 +16,6 @@ public class CarHandler : MonoBehaviour
     [SerializeField] private float _maxRotSpeed = 3f;
     [SerializeField] private float _minRotSpeed = 6f;
     [SerializeField] private float _rotAccelerationTime = 1.5f;
-    [SerializeField] private float _rotSpeed = 1f;
     
 
     [Header("Мин/Макс")]

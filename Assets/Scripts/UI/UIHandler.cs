@@ -6,11 +6,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class UIHandler : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _distanceTravelledText;
     [SerializeField] private TextMeshProUGUI _speedometerText;
     [SerializeField] private TextMeshProUGUI _gameOverText;
+    [SerializeField] private Slider _levelSlider;
     [SerializeField] private CanvasGroup _gameOverCanvasGroup;
     [SerializeField] private CanvasGroup _pauseCanvasGroup;
 
@@ -105,7 +107,15 @@ public class UIHandler : MonoBehaviour
     {
         _distanceTravelledText.text = _playerCarHandler.DistanceTravelled.ToString("000000");
         _speedometerText.text = "KM/h: " + (int)_playerCarHandler.CurrentVelocity;
+        UpdateLevelSlider();
     }
+
+    private void UpdateLevelSlider()
+    {
+        float levelProgression = Mathf.Clamp01(_playerCarHandler.DistanceTravelled / 10000f);
+        _levelSlider.value = levelProgression;
+    }
+
     public void OnResume()
     {
         Time.timeScale = 1.0f;
