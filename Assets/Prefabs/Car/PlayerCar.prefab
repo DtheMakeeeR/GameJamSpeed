@@ -377,10 +377,15 @@ MonoBehaviour:
   _accelerationMultiplier: 30
   _brakeMultiplier: 15
   _steerMultiplier: 25
-  _steerCoef: 3
+  _steerCoef: 15
+  _maxRotation: 70
+  _maxRotSpeed: 5
+  _minRotSpeed: 0.2
+  _rotAccelerationTime: 10
+  _rotSpeed: 1
   _maxForwardVelocity: 100
-  _minSpeed: 0
-  _maxSteerVelocity: 5
+  _minForwardVelocity: 0
+  _maxSteerVelocity: 15
   _rb: {fileID: 1734406757955434082}
   _gameModel: {fileID: 7743533634329572840}
   _explodeHandler: {fileID: 8557913923311488785}
@@ -411,6 +416,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  Gear: {fileID: 11400000, guid: f832873fa5a5dbc4da878fe31065c99a, type: 2}
 --- !u!114 &1722007826452086131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,6 +430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputHandler
   _car: {fileID: 6785609681318382131}
+  _box: {fileID: 0}
 --- !u!54 &1734406757955434082
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1321,6 +1328,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -7272911518199237601, guid: 79c793f4d9749284b9f8e8f97a6967f8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4601437217004051377}
+    - targetCorrespondingSourceObject: {fileID: -7272911518199237601, guid: 79c793f4d9749284b9f8e8f97a6967f8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3468614336696090667}
   m_SourcePrefab: {fileID: 100100000, guid: 79c793f4d9749284b9f8e8f97a6967f8, type: 3}
 --- !u!4 &2461621799028536680 stripped
 Transform:
@@ -1349,7 +1359,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
@@ -1425,8 +1435,29 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8643041769963566295, guid: 79c793f4d9749284b9f8e8f97a6967f8, type: 3}
+--- !u!65 &3468614336696090667
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4517879016592139932}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.02502076, y: 0.022954399, z: 0.02981265}
+  m_Center: {x: 0, y: 0.001232712, z: 0.0049063275}
