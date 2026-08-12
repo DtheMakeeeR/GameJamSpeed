@@ -21,6 +21,8 @@ public class MusicHandler : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private float  _secondsBeforeChange;
 
+    private bool _isLost;
+
     private float SecondsBeforeChange => _audioSource?.time ?? 10 - 5f;
 
     public static MusicHandler Instance;
@@ -45,26 +47,26 @@ public class MusicHandler : MonoBehaviour
         {
             playerObj.GetComponent<CarHandler>().OnPLayerCrashed += OnPlayerLost;
         }
-        if(level.buildIndex == 0)
+        if (level.buildIndex == 0)
         {
-            _audioSource.clip = _menuTrack.musicClip;
-            _audioSource.Play();
-            _audioSource.loop = true;
-            Debug.Log($"LevelLoaded1 _audioSource.loop:{_audioSource.loop}");
+            Timing.RunCoroutine(_ChangeTrackWithFadeCoroutine(_menuTrack.musicClip, 1f));
             return;
         }
-        _audioSource.loop = false;
-        Debug.Log($"LevelLoaded2 _audioSource.loop:{_audioSource.loop}");
+        PlayRandomTrackWithFade();
+    }
+
+    private void PlayRandomTrackWithFade()
+    {
         int trackIndex = UnityEngine.Random.Range(0, _mainTracks.Length);
         _audioSource.clip = _mainTracks[trackIndex].musicClip;
-        _audioSource.Play();
+        Timing.RunCoroutine(_ChangeTrackWithFadeCoroutine(_mainTracks[trackIndex].musicClip, 1f));
     }
 
     private void OnPlayerLost(CarHandler handler)
     {
         Debug.Log("Player Lost MUSIC");
+        _isLost = true;
         _ChangeTrackWithFadeCoroutine(_lostTrack.musicClip, 3);
-        _audioSource.loop = true;
     }
 
     private IEnumerator<float> _ChangeTrackWithFadeCoroutine(AudioClip clip, float fadeDuration = 5f)
