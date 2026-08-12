@@ -21,6 +21,8 @@ public class MusicHandler : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private float  _secondsBeforeChange;
 
+    private float SecondsBeforeChange => _audioSource?.time ?? 10 - 5f;
+
     public static MusicHandler Instance;
 
     private void Awake()
@@ -48,9 +50,11 @@ public class MusicHandler : MonoBehaviour
             _audioSource.clip = _menuTrack.musicClip;
             _audioSource.Play();
             _audioSource.loop = true;
+            Debug.Log($"LevelLoaded1 _audioSource.loop:{_audioSource.loop}");
             return;
         }
         _audioSource.loop = false;
+        Debug.Log($"LevelLoaded2 _audioSource.loop:{_audioSource.loop}");
         int trackIndex = UnityEngine.Random.Range(0, _mainTracks.Length);
         _audioSource.clip = _mainTracks[trackIndex].musicClip;
         _audioSource.Play();

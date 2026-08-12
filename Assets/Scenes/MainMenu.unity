@@ -276,21 +276,25 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!4 &5939236
-Transform:
+--- !u!224 &5939236
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5939233}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.76, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 4.76}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5939237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1826,67 +1830,67 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Vehicle controls use the WASD keys.
 
-    W accelerates and increases
-    engine RPM.
+    W accelerates and increases engine
+    RPM.
 
     S brakes and reduces speed.
 
-    A and D steer the car left
-    and right respectively.
+    A and D steer the car left and right
+    respectively.
 
-    
+
 
     The gearbox is controlled with arrow keys.
 
-    Up
-    and down arrows shift gears up or down by moving the gear lever on the H-pattern
-    diagram.
+    Up and down
+    arrows shift gears up or down by moving the gear lever on the H-pattern diagram.
 
-    Left and right arrows move the lever sideways according to the
-    gear layout.
+    Left
+    and right arrows move the lever sideways according to the gear layout.
 
-    
 
-    Reverse gear (R) does not work and will never engage
-    - this is the main feature of the game "You Cant Drive Backwards".
 
-    You
-    will have to learn to maneuver by only moving forward.
+    Reverse
+    gear (R) does not work and will never engage - this is the main feature of the
+    game "You Cant Drive Backwards".
 
-    
+    You will have to learn to maneuver by only
+    moving forward.
 
-    In neutral
-    gear, speed does not increase and the throttle is disabled.
 
-    The car brakes
-    effectively and coasts by inertia, making it perfect for stopping or rolling
-    freely.
 
-    
+    In neutral gear, speed does not increase and the throttle
+    is disabled.
 
-    The maximum speed on first gear is 10 kilometers per hour.
+    The car brakes effectively and coasts by inertia, making it
+    perfect for stopping or rolling freely.
 
-    Second
-    gear allows up to 20 kilometers per hour but requires a minimum speed of 8 kilometers
-    per hour to engage.
 
-    Third gear has a maximum of 60 kilometers per hour
-    with a minimum engagement speed of 30 kilometers per hour.
 
-    Fourth gear
-    reaches 80 kilometers per hour with a threshold of 55 kilometers per hour.
+    The maximum speed on first gear
+    is 10 kilometers per hour.
 
-    Fifth
-    gear tops out at 200 kilometers per hour but can only be engaged when traveling
-    at least 75 kilometers per hour.
+    Second gear allows up to 20 kilometers per hour
+    but requires a minimum speed of 8 kilometers per hour to engage.
 
-    
+    Third gear
+    has a maximum of 60 kilometers per hour with a minimum engagement speed of 30
+    kilometers per hour.
 
-    Keep in mind that braking at high
-    speeds is ineffective.
+    Fourth gear reaches 80 kilometers per hour with a threshold
+    of 55 kilometers per hour.
 
-    For quick stopping, you should either switch to
-    neutral or downshift progressively to use engine braking.'
+    Fifth gear tops out at 200 kilometers per hour
+    but can only be engaged when traveling at least 75 kilometers per hour.
+
+
+
+    Keep
+    in mind that braking at high speeds is ineffective.
+
+    For quick stopping,
+    you should either switch to neutral or downshift progressively to use engine
+    braking.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
