@@ -23,6 +23,7 @@ public class MusicHandler : MonoBehaviour
 
     private bool _isLost;
     private int _levelIndex;
+    private bool _trackIsChanging = false;
     private float SecondsBeforeChange => _audioSource?.time ?? 10 - 5f;
 
     public static MusicHandler Instance;
@@ -87,6 +88,7 @@ public class MusicHandler : MonoBehaviour
 
     private IEnumerator<float> _ChangeTrackWithFadeCoroutine(AudioClip clip, float fadeDuration = 5f)
     {
+        _trackIsChanging = true;
         float percent = 0f;
         while (percent < 1f)
         {
@@ -103,6 +105,7 @@ public class MusicHandler : MonoBehaviour
             _audioSource.volume = Mathf.Lerp(0f, 1f, percent);
             yield return Timing.WaitForOneFrame;
         }
+        _trackIsChanging = false;
     }
 
     private IEnumerator<float> _ChangeTrackCoroutine()
@@ -114,7 +117,11 @@ public class MusicHandler : MonoBehaviour
     }
     private void Update()
     {
-        while (_audioSource.time < (_audioSource.clip?.length ?? 60) - SecondsBeforeChange) 
+        if (_audioSource.time < (_audioSource.clip?.length ?? 60) - SecondsBeforeChange) 
+        {
+            return;
+        }
+        if(_trackIsChanging)
         {
             return;
         }
