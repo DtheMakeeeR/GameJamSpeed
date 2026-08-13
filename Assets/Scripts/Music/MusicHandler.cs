@@ -22,10 +22,11 @@ public class MusicHandler : MonoBehaviour
     [SerializeField] private float  _secondsBeforeChange;
 
     private bool _isLost;
-
+    private int _levelIndex;
     private float SecondsBeforeChange => _audioSource?.time ?? 10 - 5f;
 
     public static MusicHandler Instance;
+    private MusicHandlerData _nextTrack;
 
     private void Awake()
     {
@@ -42,24 +43,39 @@ public class MusicHandler : MonoBehaviour
     }
     private void OnLevelLoaded(Scene level)
     {
+        _levelIndex = level.buildIndex;
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
             playerObj.GetComponent<CarHandler>().OnPLayerCrashed += OnPlayerLost;
         }
-        if (level.buildIndex == 0)
-        {
-            Timing.RunCoroutine(_ChangeTrackWithFadeCoroutine(_menuTrack.musicClip, 1f));
-            return;
-        }
-        PlayRandomTrackWithFade();
+        PlayTrackWithFade();
     }
 
-    private void PlayRandomTrackWithFade()
+    private void PlayTrackWithFade()
     {
-        int trackIndex = UnityEngine.Random.Range(0, _mainTracks.Length);
-        _audioSource.clip = _mainTracks[trackIndex].musicClip;
-        Timing.RunCoroutine(_ChangeTrackWithFadeCoroutine(_mainTracks[trackIndex].musicClip, 1f));
+        CalculateNextTrack();
+        Timing.RunCoroutine(_ChangeTrackWithFadeCoroutine(_nextTrack.musicClip, 5f));
+    }
+
+    private void CalculateNextTrack()
+    {
+        if (_isLost)
+        {
+            _nextTrack = _lostTrack;
+            return;
+        }
+        if (_levelIndex == 0)
+        {
+            _nextTrack = _menuTrack;
+            return;
+        }
+        else
+        {
+            int trackIndex = UnityEngine.Random.Range(0, _mainTracks.Length);
+            _nextTrack = _mainTracks[trackIndex];
+            return;
+        }
     }
 
     private void OnPlayerLost(CarHandler handler)
@@ -98,15 +114,10 @@ public class MusicHandler : MonoBehaviour
     }
     private void Update()
     {
-        while (_audioSource.time < _audioSource.clip.length - _secondsBeforeChange)
-        {
-            return;
-        } 
-        if(_audioSource.loop)
+        while (_audioSource.time < (_audioSource.clip?.length ?? 60) - SecondsBeforeChange) 
         {
             return;
         }
-        int trackIndex = UnityEngine.Random.Range(0, _mainTracks.Length);
-        Timing.RunCoroutine(_ChangeTrackWithFadeCoroutine(_mainTracks[trackIndex].musicClip));
+        PlayTrackWithFade();
     }
 }
